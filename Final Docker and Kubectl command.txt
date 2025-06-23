@@ -13,3 +13,16 @@ kubectl apply -f deployment.yml
 kubectl get all 
 
  docker ps  
+
+K8s Pod URLS :
+http://localhost:8081/swagger/index.html
+
+RabbitMQ URL:
+environment:  # Corrected spelling
+  - RABBITMQ_DEFAULT_USER=user
+  - RABBITMQ_DEFAULT_PASS=mypass
+ports: 
+  # RabbitMQ instance
+  - '5672:5672' 
+  # Web interface
+  - '15672:15672'
