@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-app-deployment
+  annotations:
+    kubernetes.io/change-cause: "Initital Deployment of the app "
+spec:
+  replicas: 4
+  selector:
+     matchLabels:
+        app: k8s-app
+  template:
+    metadata:
+      name: myk8s
+      labels:
+        env: prod
+        app: k8s-app
+        app.kubernetes.io/name: k8s-app
+    spec:
+      containers:
+       - name: k8s-app
+         image: daudulislam/enrollmentsapi:v8
+         ports:
+           - containerPort: 80
+             name: http-web-api
+         resources:
+           requests:
+             cpu: 100m
+             memory: 100Mi
+           limits:
+             cpu: 200m
+             memory: 200Mi
+         env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-lb-service
+spec:
+  selector: 
+    app.kubernetes.io/name: k8s-app
+  ports:
+   - name: k8s-app
+     protocol: TCP
+     port: 8081
+     targetPort: 80
+  type: LoadBalancer
+
+
+   
+
+
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: enrollmentsapi
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: enrollmentsapi
+#   template:
+#     metadata:
+#       labels:
+#         app: enrollmentsapi
+#     spec:
+#       containers:
+#       - name: enrollmentsapi
+#         image: daudulislam/enrollmentsapi:latest
+#         ports:
+#         - containerPort: 80
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: enrollmentsapi
+# spec:
+#   selector:
+#     app: enrollmentsapi
+#   ports:
+#     - protocol: "TCP"
+#       port: 80
+#       targetPort: 8080
+#       nodePort: 30000    # NodePort to access the service
+#   type: LoadBalancer

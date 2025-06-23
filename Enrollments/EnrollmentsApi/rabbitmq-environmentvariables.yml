@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myk8s
+spec:
+  template:
+    spec:
+      containers:
+        - name: k8s-app
+          image: daudulislam/enrollmentsapi:v8
+          env:
+            - name: RABBITMQ_HOST
+              value: "172.18.64.1"
+            - name: RABBITMQ_PORT
+              value: "5672"

@@ -1,0 +1,38 @@
+docker-compose up 
+
+for RabbitMQ Deploy
+
+
+docker run --rm -p 5000:5000 -p 5001:5001 -e ASPNETCORE_HTTP_PORT=https://+:5001 -e ASPNETCORE_URLS=http://+:5000 daudulislam/testpoc:v1
+
+https://www.youtube.com/watch?v=x9NptrXA1dM&t=2695s
+
+
+kubectl apply -f rabbitmq-deployment.yaml
+
+kubectl delete -f rabbitmq-deployment.yml
+
+
+docker build . -t daudulislam/enrollmentsapi 
+
+https://localhost:5000/swagger/index.html
+http://localhost:5000/swagger/index.html
+
+
+
+docker push daudulislam/enrollmentsapi:v1    
+
+
+
+kubectl apply -f deployment.yaml
+kubectl delete -f deployment.yml   
+
+kubectl delete service enrollmentsapi
+
+
+kubectl get services
+
+docker run -d -p 8080:80 -p 443:443 --name EnrollmentsApi daudulislam/enrollmentsapi
+
+
+http://localhost:32779/swagger/index.html

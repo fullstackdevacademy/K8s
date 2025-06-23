@@ -1,0 +1,15 @@
+RabbitMQ Deploy as Docker Container by Docker Compose
+
+docker-compose up
+
+kubectl delete -f deployment.yml
+
+docker build .  -t daudulislam/enrollmentsapi:v8
+
+docker push daudulislam/enrollmentsapi:v8  
+
+kubectl apply -f deployment.yml 
+
+kubectl get all 
+
+ docker ps  
